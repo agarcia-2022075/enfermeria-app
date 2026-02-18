@@ -1,0 +1,101 @@
+{
+  "info": {
+    "_postman_id": "c5348d5f-8472-4bfc-aa74-0441ab01c611",
+    "name": "Enfermeria-app-2022075",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52312172"
+  },
+  "item": [
+    {
+      "name": "Crear",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Paolo\",\r\n  \"apellido\": \"Garcia\",\r\n  \"turno\": \"Mañana\",\r\n  \"telefono\": \"5555-1234\",\r\n  \"correo\": \"paolo@hospital.com\",\r\n  \"puesto\": \"Jefe de Grupo\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/personal",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "personal"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Todos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/personal/buscar?nombre=Paolo",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "personal",
+            "buscar"
+          ],
+          "query": [
+            {
+              "key": "nombre",
+              "value": "Paolo"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Paolo\",\r\n  \"apellido\": \"Garcia\",\r\n  \"turno\": \"Noche\",\r\n  \"telefono\": \"5556-1234\",\r\n  \"correo\": \"paolo@hospital.com\",\r\n  \"puesto\": \"Jefe de Grupo\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/personal/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "personal",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar",
+      "request": {
+        "method": "DELETE",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
