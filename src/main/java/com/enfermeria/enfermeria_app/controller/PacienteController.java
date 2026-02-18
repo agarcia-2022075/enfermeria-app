@@ -48,4 +48,10 @@ public class PacienteController {
         repo.deleteById(id);
         return "Paciente eliminado correctamente";
     }
+
+    // GET /pacientes/buscar?nombre=Herbert
+    @GetMapping("/buscar")
+    public List<Paciente> buscarPorNombre(@RequestParam String nombre) {
+        return repo.findByNombreContainingIgnoreCase(nombre);
+    }
 }
