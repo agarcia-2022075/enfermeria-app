@@ -24,11 +24,13 @@ public class AtencionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Atencion> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<?> obtenerPorId(@PathVariable Long id) {
         Optional<Atencion> atencion = repo.findById(id);
         if (atencion.isPresent()) {
             return ResponseEntity.ok(atencion.get());
-        } else {return ResponseEntity.notFound().build();}
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/paciente/{pacienteId}")
