@@ -46,4 +46,4 @@ public class Insumo {
 
     public String getProveedor() { return proveedor; }
     public void setProveedor(String proveedor) { this.proveedor = proveedor; }
-}s
+}
