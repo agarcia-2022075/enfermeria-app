@@ -5,7 +5,7 @@ import com.enfermeria.enfermeria_app.repository.AtencionRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+import java.util.Optional;
 import java.util.List;
 
 @RestController
@@ -25,9 +25,10 @@ public class AtencionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Atencion> obtenerPorId(@PathVariable Long id) {
-        return repo.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Optional<Atencion> atencion = repo.findById(id);
+        if (atencion.isPresent()) {
+            return ResponseEntity.ok(atencion.get());
+        } else {return ResponseEntity.notFound().build();}
     }
 
     @GetMapping("/paciente/{pacienteId}")
@@ -43,14 +44,16 @@ public class AtencionController {
     @PostMapping
     public ResponseEntity<Atencion> crear(@RequestBody Atencion nueva) {
         Atencion guardada = repo.save(nueva);
-        return ResponseEntity.created(URI.create("/api/atenciones/" + guardada.getId()))
-                .body(guardada);
+        return ResponseEntity.ok(guardada);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Atencion> actualizar(@PathVariable Long id, @RequestBody Atencion cambios) {
-        return repo.findById(id)
-                .map(actual -> {
+    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody Atencion cambios) {
+        Optional<Atencion> oAtencion = repo.findById(id);
+        if (oAtencion.isEmpty()) {
+            return ResponseEntity.notFound().build();}
+
+                    Atencion actual = oAtencion.get();
                     actual.setFecha(cambios.getFecha());
                     actual.setMotivo(cambios.getMotivo());
                     actual.setDiagnostico(cambios.getDiagnostico());
@@ -58,17 +61,16 @@ public class AtencionController {
                     actual.setPacienteId(cambios.getPacienteId());
                     actual.setEnfermeroId(cambios.getEnfermeroId());
                     return ResponseEntity.ok(repo.save(actual));
-                })
-                .orElse(ResponseEntity.notFound().build());
+
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> eliminar(@PathVariable Long id) {
-        return repo.findById(id)
-                .map(ent -> {
-                    repo.delete(ent);
-                    return ResponseEntity.noContent().build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        if (!repo.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        repo.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
