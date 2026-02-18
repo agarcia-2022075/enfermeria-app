@@ -18,13 +18,13 @@ public class InsumoController {
         this.repo = repo;
     }
 
-    // GET all - Listar todos los insumos (ya lo tienes)
+    // GET all - Listar todos los insumos
     @GetMapping
     public List<Insumo> listar() {
         return repo.findAll();
     }
 
-    // GET by ID - Buscar insumo por ID (NUEVO)
+    // GET by ID - Buscar insumo por ID
     @GetMapping("/{id}")
     public ResponseEntity<Insumo> obtenerPorId(@PathVariable Long id) {
         Optional<Insumo> insumo = repo.findById(id);
@@ -35,14 +35,14 @@ public class InsumoController {
         }
     }
 
-    // POST - Crear nuevo insumo (ya lo tienes)
+    // POST - Crear nuevo insumo
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Insumo guardar(@RequestBody Insumo insumo) {
         return repo.save(insumo);
     }
 
-    // PUT - Actualizar insumo existente (NUEVO)
+    // PUT - Actualizar insumo existente
     @PutMapping("/{id}")
     public ResponseEntity<Insumo> actualizar(@PathVariable Long id, @RequestBody Insumo insumoActualizado) {
         Optional<Insumo> insumoOptional = repo.findById(id);
@@ -62,7 +62,7 @@ public class InsumoController {
         }
     }
 
-    // DELETE - Eliminar insumo por ID (NUEVO)
+    // DELETE - Eliminar insumo por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         if (repo.existsById(id)) {
