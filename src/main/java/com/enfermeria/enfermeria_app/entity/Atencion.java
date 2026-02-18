@@ -1,4 +1,5 @@
 package com.enfermeria.enfermeria_app.entity;
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -10,25 +11,24 @@ public class Atencion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private LocalDate fecha;
 
-    @Column(nullable = false, length = 200)
     private String motivo;
 
-    @Column(nullable = false, length = 500)
+
+    @Column(nullable = false)
     private String diagnostico;
 
-    @Column(nullable = false, length = 500)
     private String tratamiento;
 
-    @Column(nullable = false)
-    private Long pacienteId;
 
-    @Column(nullable = false)
+    private Long pacienteId;
     private Long enfermeroId;
 
-    public Atencion() {}
+    public Atencion() {
+    }
+
+    // --- GETTERS Y SETTERS OBLIGATORIOS ---
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
