@@ -1,4 +1,5 @@
-package com.enfermeria.enfermeria_app.entity;
+package com.enfermeria.api.entity;  // CAMBIADO
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -22,14 +23,16 @@ public class Atencion {
     @Column(nullable = false, length = 500)
     private String tratamiento;
 
-    @Column(nullable = false)
+    @Column(name = "paciente_id", nullable = false)
     private Long pacienteId;
 
-    @Column(nullable = false)
-    private Long enfermeroId;
+    @Column(name = "personal_id", nullable = false)
+    private Long personalId;
 
+    // Constructor vacío
     public Atencion() {}
 
+    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -48,6 +51,6 @@ public class Atencion {
     public Long getPacienteId() { return pacienteId; }
     public void setPacienteId(Long pacienteId) { this.pacienteId = pacienteId; }
 
-    public Long getEnfermeroId() { return enfermeroId; }
-    public void setEnfermeroId(Long enfermeroId) { this.enfermeroId = enfermeroId; }
+    public Long getPersonalId() { return personalId; }
+    public void setPersonalId(Long personalId) { this.personalId = personalId; }
 }
